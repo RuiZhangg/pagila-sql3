@@ -3,6 +3,12 @@
  *
  * Write a SQL query that lists the title of all movies that share at least 1 actor with 'AMERICAN CIRCUS'.
  *
- * HINT:
- * This can be solved with a self join on the film_actor table.
  */
+
+SELECT title FROM film
+JOIN film_actor USING (film_id)
+WHERE actor_id IN (
+SELECT actor_id FROM film_actor
+JOIN film USING (film_id)
+WHERE title LIKE 'AMERICAN CIRCUS')
+ORDER BY title;
